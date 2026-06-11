@@ -1,0 +1,6 @@
+{
+  "name": "s2fitting-noria",
+  "description": "NORIA-style N132D/RGS fixture placeholder.",
+  "expected_min_score": 0.8,
+  "checks": ["structure", "provenance", "retrieval", "comparison"]
+}
