@@ -1,5 +1,5 @@
 ---
-name: astro-doc-parse
+name: parse
 description: Parse PDFs, images, Office files, and HTML into Markdown or JSON for AstroWiki raw staging. Inspired by z-smart-xparse.
 ---
 

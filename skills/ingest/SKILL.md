@@ -1,5 +1,5 @@
 ---
-name: astro-kb-ingest
+name: ingest
 description: Stage local PDFs, notes, tables, and web captures into raw/. Use for new source material that is not yet ready for wiki compilation.
 ---
 

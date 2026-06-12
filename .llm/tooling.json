@@ -3,7 +3,7 @@
   "mcpServers": {
     "astrowiki": {
       "command": "python",
-      "args": ["tools/astrowiki_mcp_server.py", "3849", "wiki"],
+      "args": ["tools/server.py", "3849", "wiki"],
       "description": "Local AstroWiki knowledge service exposing search, get, list_concepts, graph_neighbors, and submit_feedback."
     }
   },

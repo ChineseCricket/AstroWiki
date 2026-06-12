@@ -1,5 +1,5 @@
 ---
-name: astro-kb-synthesis
+name: synthesis
 description: Generate or update a thesis-bearing synthesis page from approved AstroWiki sources.
 ---
 
@@ -9,7 +9,7 @@ Synthesis writes to `inbox/synthesis/` first.
 
 ## Workflow
 
-1. Run `python tools/astrowiki_lint.py --quiet`.
+1. Run `python tools/lint.py --quiet`.
 2. Read relevant sources, concepts, methods, objects, datasets, and instruments.
 3. Check whether an existing synthesis page covers the topic.
 4. Create or update a draft in `inbox/synthesis/`.

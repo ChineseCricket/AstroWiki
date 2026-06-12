@@ -1,5 +1,5 @@
 ---
-name: astro-kb-sync
+name: sync
 description: Discover and stage astrophysics literature metadata into raw/ using ADS. Use when the user asks to search papers, refresh literature, inspect citations, or import bibcodes.
 ---
 
@@ -9,14 +9,14 @@ Stage bibliographic source metadata into `raw/`. Do not write to `wiki/`.
 
 ## Default Source
 
-Use NASA ADS through `tools/ads_sync.py`.
+Use NASA ADS through `tools/sync.py`.
 
 Examples:
 
 ```bash
-python tools/ads_sync.py search "galaxy cluster scaling relations" --limit 20 --dry-run
-python tools/ads_sync.py search "galaxy cluster scaling relations" --limit 20
-python tools/ads_sync.py bibcode "2010MNRAS.406.1759M"
+python tools/sync.py search "galaxy cluster scaling relations" --limit 20 --dry-run
+python tools/sync.py search "galaxy cluster scaling relations" --limit 20
+python tools/sync.py bibcode "2010MNRAS.406.1759M"
 ```
 
 ## Workflow
@@ -25,7 +25,7 @@ python tools/ads_sync.py bibcode "2010MNRAS.406.1759M"
 2. Run ADS search in `--dry-run` mode first unless the user provided exact bibcodes.
 3. Stage selected records into `raw/ads/`.
 4. Do not summarize or synthesize here.
-5. Leave compilation to `astro-kb-compile`.
+5. Leave compilation to `compile`.
 
 ## Rules
 

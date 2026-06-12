@@ -2,11 +2,10 @@
 
 Before tagging a release:
 
-- [ ] `python tools/astrowiki_lint.py --quiet`
-- [ ] `python tools/ads_sync.py search "galaxy cluster" --limit 1 --dry-run`
-- [ ] `python tools/run_benchmark.py --fixture benchmarks/fixtures/s2fitting-noria`
-- [ ] `python tools/run_benchmark.py --fixture benchmarks/fixtures/final-project-scaling`
-- [ ] MCP smoke test returns JSON for `search`
+- [ ] `python tools/lint.py --quiet`
+- [ ] `python tools/sync.py search "galaxy cluster" --limit 1 --dry-run`
+- [ ] `python tools/server.py --smoke`
+- [ ] private benchmark fixtures pass locally when available
 - [ ] README quick start still matches tool behavior
 - [ ] no credentials or local absolute paths are committed
 

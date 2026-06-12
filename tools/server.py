@@ -13,7 +13,7 @@ import re
 import sys
 from pathlib import Path
 
-from astrowiki_common import PAGE_DIRS, parse_frontmatter, project_root, read_text, wiki_pages, write_text
+from common import PAGE_DIRS, parse_frontmatter, project_root, read_text, wiki_pages, write_text
 
 
 def page_record(root: Path, path: Path) -> dict:

@@ -17,11 +17,14 @@ env/
 outputs/queries/*
 outputs/reviews/*
 outputs/exports/*
-outputs/benchmark/*
+outputs/benchmark/
 !outputs/queries/.gitkeep
 !outputs/reviews/.gitkeep
 !outputs/exports/.gitkeep
-!outputs/benchmark/.gitkeep
+
+# Private benchmark material
+benchmarks/fixtures/
+benchmarks/private/
 
 # Raw large local material
 raw/documents/*

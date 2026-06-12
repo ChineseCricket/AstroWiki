@@ -15,7 +15,7 @@ AstroWiki uses a strict ownership model.
 
 1. `raw/` is user-owned. Do not rewrite raw source material during compilation.
 2. Draft pages go to `inbox/`.
-3. Approved pages go to `wiki/` only via `tools/astrowiki_queue.py approve`.
+3. Approved pages go to `wiki/` only via `tools/queue.py approve`.
 4. `query-derived` content stays in `outputs/`.
-5. Run `python tools/astrowiki_lint.py --quiet` before synthesis or release.
+5. Run `python tools/lint.py --quiet` before synthesis or release.
 6. Never silently resolve contradictions. Add a `## Contradictions` section.

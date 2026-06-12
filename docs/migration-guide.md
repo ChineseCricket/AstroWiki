@@ -27,7 +27,7 @@ Do not put ad hoc query answers into `wiki/`.
 Run:
 
 ```bash
-python tools/astrowiki_lint.py --include-inbox
+python tools/lint.py --include-inbox
 ```
 
 Fix pages until there are no FAIL issues.
@@ -37,12 +37,12 @@ Fix pages until there are no FAIL issues.
 If a migrated page is not yet verified, place it under `inbox/` and approve later:
 
 ```bash
-python tools/astrowiki_queue.py list
-python tools/astrowiki_queue.py approve <slug>
+python tools/queue.py list
+python tools/queue.py approve <slug>
 ```
 
 ## 5. Validate Search
 
 ```bash
-printf '{"method":"search","params":{"query":"your topic","limit":5}}\n' | python tools/astrowiki_mcp_server.py
+printf '{"method":"search","params":{"query":"your topic","limit":5}}\n' | python tools/server.py
 ```
