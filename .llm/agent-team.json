@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "default_policy": "raw_to_inbox_to_wiki",
+  "roles": {
+    "controller": {
+      "description": "Owns approval into wiki and final synthesis.",
+      "allowed_writes": ["wiki", ".kb", "outputs"]
+    },
+    "worker": {
+      "description": "Stages sources and drafts pages.",
+      "allowed_writes": ["raw", "inbox", ".kb"]
+    },
+    "reviewer": {
+      "description": "Audits claims, citations, and implementation.",
+      "allowed_writes": ["outputs/reviews"]
+    }
+  }
+}
