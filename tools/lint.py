@@ -10,7 +10,7 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-from astrowiki_common import (
+from common import (
     PAGE_DIRS,
     TRUSTED_PROVENANCE,
     VALID_CLAIM_TYPES,

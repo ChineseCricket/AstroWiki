@@ -1,5 +1,5 @@
 ---
-name: astro-kb-lint
+name: lint
 description: Check AstroWiki health and provenance. Use before synthesis, release, migration, or approval.
 ---
 
@@ -8,9 +8,9 @@ description: Check AstroWiki health and provenance. Use before synthesis, releas
 Run deterministic checks first:
 
 ```bash
-python tools/astrowiki_lint.py --quiet
-python tools/astrowiki_lint.py --json
-python tools/astrowiki_lint.py --include-inbox
+python tools/lint.py --quiet
+python tools/lint.py --json
+python tools/lint.py --include-inbox
 ```
 
 ## Checks

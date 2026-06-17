@@ -10,7 +10,7 @@ import re
 import zipfile
 from pathlib import Path
 
-from astrowiki_common import parse_frontmatter, project_root, read_text, wiki_pages, write_text
+from common import parse_frontmatter, project_root, read_text, wiki_pages, write_text
 
 
 def export_jsonl(root: Path, output: Path) -> None:

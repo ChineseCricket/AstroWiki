@@ -1,5 +1,5 @@
 ---
-name: astro-kb-compile
+name: compile
 description: Compile staged raw material into inbox pages with provenance, claims, and wikilinks. Use after raw sources have been staged.
 ---
 
@@ -15,7 +15,7 @@ Compile `raw/` files into `inbox/`. Never write directly to `wiki/`.
 4. Extract 3-8 locator-backed claims.
 5. Create or update concept/method/object/dataset/instrument drafts in `inbox/` when needed.
 6. Update `.kb/manifest.json` with draft paths.
-7. Run `python tools/astrowiki_lint.py --quiet --include-inbox`.
+7. Run `python tools/lint.py --quiet --include-inbox`.
 
 ## Source Page Requirements
 

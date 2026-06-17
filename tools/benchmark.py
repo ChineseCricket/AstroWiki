@@ -10,14 +10,14 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from astrowiki_common import dump_json, load_json, project_root, write_text
+from common import dump_json, load_json, project_root, write_text
 
 
 def score_fixture(root: Path, fixture: Path) -> dict:
     meta = load_json(fixture / "fixture.json", {})
     checks = meta.get("checks", [])
     results = []
-    lint = subprocess.run([sys.executable, "tools/astrowiki_lint.py", "--json"], cwd=root, text=True, capture_output=True)
+    lint = subprocess.run([sys.executable, "tools/lint.py", "--json"], cwd=root, text=True, capture_output=True)
     lint_issues = json.loads(lint.stdout) if lint.stdout.strip().startswith("[") else []
     lint_fail = any(i.get("level") == "FAIL" for i in lint_issues)
     for check in checks:
@@ -41,6 +41,11 @@ def main() -> int:
     args = parser.parse_args()
     root = project_root()
     fixture = (root / args.fixture).resolve()
+    if not (fixture / "fixture.json").exists():
+        raise SystemExit(
+            "Benchmark fixture not found. Real fixtures are intentionally private; "
+            "pass a local fixture directory containing fixture.json."
+        )
     result = score_fixture(root, fixture)
     out_dir = root / "outputs" / "benchmark"
     out_dir.mkdir(parents=True, exist_ok=True)

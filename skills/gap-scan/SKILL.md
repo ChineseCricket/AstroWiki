@@ -1,5 +1,5 @@
 ---
-name: astro-kb-gap-scan
+name: gap-scan
 description: Identify knowledge gaps in an AstroWiki project: missing coverage, shallow sources, orphan pages, and synthesis opportunities.
 ---
 
@@ -17,7 +17,7 @@ This is read-only analysis.
 
 ## Workflow
 
-1. Run `python tools/astrowiki_lint.py --quiet`.
+1. Run `python tools/lint.py --quiet`.
 2. Read `wiki/index.md`, source claims, and concept pages.
 3. Identify high-impact gaps.
 4. Write the report to `outputs/reviews/`.

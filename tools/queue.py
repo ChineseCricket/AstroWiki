@@ -9,7 +9,7 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-from astrowiki_common import PAGE_DIRS, dump_json, load_json, parse_frontmatter, project_root, read_text, write_text
+from common import PAGE_DIRS, dump_json, load_json, parse_frontmatter, project_root, read_text, write_text
 
 
 def inbox_pages(root: Path) -> list[Path]:

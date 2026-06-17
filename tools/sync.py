@@ -12,7 +12,7 @@ import urllib.request
 from datetime import date
 from pathlib import Path
 
-from astrowiki_common import dump_json, load_json, project_root, slugify, write_text
+from common import dump_json, load_json, project_root, slugify, write_text
 
 
 ADS_API = "https://api.adsabs.harvard.edu/v1/search/query"

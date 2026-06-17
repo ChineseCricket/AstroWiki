@@ -13,7 +13,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python tools/astrowiki_lint.py --quiet
-      - run: python tools/ads_sync.py search "supernova remnants" --limit 1 --dry-run
-      - run: python tools/run_benchmark.py --fixture benchmarks/fixtures/s2fitting-noria
-      - run: python tools/run_benchmark.py --fixture benchmarks/fixtures/final-project-scaling
+      - run: python tools/lint.py --quiet
+      - run: python tools/sync.py search "supernova remnants" --limit 1 --dry-run
+      - run: python tools/server.py --smoke

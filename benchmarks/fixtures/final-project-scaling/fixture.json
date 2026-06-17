@@ -1,6 +1,0 @@
-{
-  "name": "final-project-scaling",
-  "description": "Galaxy cluster scaling fixture placeholder.",
-  "expected_min_score": 0.8,
-  "checks": ["structure", "provenance", "content_quality", "migration"]
-}

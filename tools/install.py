@@ -9,6 +9,11 @@ from pathlib import Path
 
 
 SKIP = {".git", "__pycache__", ".pytest_cache"}
+SKIP_RELATIVE = {
+    Path("benchmarks") / "fixtures",
+    Path("benchmarks") / "private",
+    Path("outputs") / "benchmark",
+}
 
 
 def copy_tree(src: Path, dst: Path, force: bool) -> None:
@@ -16,6 +21,8 @@ def copy_tree(src: Path, dst: Path, force: bool) -> None:
         if any(part in SKIP for part in item.parts):
             continue
         rel = item.relative_to(src)
+        if any(rel == skipped or skipped in rel.parents for skipped in SKIP_RELATIVE):
+            continue
         target = dst / rel
         if item.is_dir():
             target.mkdir(parents=True, exist_ok=True)

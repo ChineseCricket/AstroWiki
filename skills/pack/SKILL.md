@@ -1,5 +1,5 @@
 ---
-name: astro-web-pack
+name: pack
 description: Capture topic-related web pages into raw/web as local research packs. Inspired by z-web-pack but portable and path-neutral.
 ---
 
