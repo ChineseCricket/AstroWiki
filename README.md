@@ -74,6 +74,7 @@ Rules:
 The `skills/` directory contains reusable agent procedures:
 
 - `sync`
+- `ask`
 - `ingest`
 - `compile`
 - `approve`
@@ -96,6 +97,13 @@ Run a private fixture with:
 
 ```bash
 python tools/benchmark.py --fixture /path/to/private-fixture
+```
+
+Or validate a read-only local knowledge base directly:
+
+```bash
+python tools/benchmark.py --kb-root /path/to/astrowiki-project --profile astrowiki --name s2fitting-noria
+python tools/benchmark.py --kb-root /path/to/legacy-project --profile legacy-wiki --name final-project-scaling
 ```
 
 These are written as generic `SKILL.md` files so they can be adapted to Claude Code, Codex, Cursor, Gemini CLI, or other agent runners.
