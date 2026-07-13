@@ -7,12 +7,17 @@
       "allowed_writes": ["wiki", ".kb", "outputs"]
     },
     "worker": {
-      "description": "Stages sources and drafts pages.",
+      "description": "Stages sources (raw/) and drafts pages (inbox/).",
       "allowed_writes": ["raw", "inbox", ".kb"]
     },
     "reviewer": {
-      "description": "Audits claims, citations, and implementation.",
+      "description": "Audits claims, citations, and physics correctness.",
       "allowed_writes": ["outputs/reviews"]
     }
+  },
+  "routing": {
+    "orchestrator": "controller — planning, synthesis, architecture",
+    "research_worker": "general-purpose subagents — web search + source extraction",
+    "lint_triage": "deterministic, no reasoning — tools/lint.py"
   }
 }

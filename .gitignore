@@ -17,21 +17,19 @@ env/
 outputs/queries/*
 outputs/reviews/*
 outputs/exports/*
-outputs/benchmark/
 !outputs/queries/.gitkeep
 !outputs/reviews/.gitkeep
 !outputs/exports/.gitkeep
 
-# Private benchmark material
-benchmarks/fixtures/
-benchmarks/private/
-
-# Raw large local material
+# Large local source material
 raw/documents/*
-raw/tables/*
+raw/papers/*
+raw/web/*
 !raw/documents/.gitkeep
-!raw/tables/.gitkeep
+!raw/web/.gitkeep
+sixte-master/
 
-# Local search/index caches
+# Local editor and search state
+.obsidian/workspace.json
 .qmd/
 .cache/

@@ -1,34 +1,20 @@
 ---
 name: sync
-description: Discover and stage astrophysics literature metadata into raw/ using ADS. Use when the user asks to search papers, refresh literature, inspect citations, or import bibcodes.
+description: Discover and stage literature metadata (ADS/arXiv) into raw/. Use when asked to search papers or import bibcodes.
 ---
 
-# Astro KB Sync
+# llm-wiki Sync
 
-Stage bibliographic source metadata into `raw/`. Do not write to `wiki/`.
-
-## Default Source
-
-Use NASA ADS through `tools/sync.py`.
-
-Examples:
+Stage bibliographic metadata into `raw/ads/`. Do not write to `wiki/`.
 
 ```bash
-python tools/sync.py search "galaxy cluster scaling relations" --limit 20 --dry-run
-python tools/sync.py search "galaxy cluster scaling relations" --limit 20
-python tools/sync.py bibcode "2010MNRAS.406.1759M"
+# (requires ADS_API_TOKEN for live search; otherwise stage from arXiv/known bibcodes)
 ```
 
 ## Workflow
 
-1. Read `AGENTS.md` and `wiki/schema.md`.
-2. Run ADS search in `--dry-run` mode first unless the user provided exact bibcodes.
+1. Read `AGENTS.md`, `wiki/schema.md`.
+2. Dry-run search first unless exact bibcodes given.
 3. Stage selected records into `raw/ads/`.
-4. Do not summarize or synthesize here.
-5. Leave compilation to `compile`.
-
-## Rules
-
-- Preserve ADS bibcode, DOI, arXiv ID, title, authors, abstract, citation count, references, and citations when available.
-- Deduplicate by ADS bibcode, DOI, and arXiv ID.
-- If ADS credentials are missing, report the limitation and use dry-run/example mode only.
+4. Deduplicate by bibcode/DOI/arXiv. Leave compilation to `compile`.
+5. If credentials missing, report the limitation and stage from public metadata only.

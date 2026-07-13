@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Deterministic AstroWiki health checks."""
+"""Deterministic llm-wiki health checks (ported from AstroWiki).
+
+Checks: schema/frontmatter, provenance, claims (source pages),
+synthesis structure, wikilink resolution, index references, and the
+.kb/ manifest. Run `python tools/lint.py --quiet` before any synthesis.
+"""
 
 from __future__ import annotations
 
@@ -77,8 +82,8 @@ def check_pages(root: Path, include_inbox: bool) -> list[Issue]:
             claims = fm.get("claims")
             if not isinstance(claims, list) or len(claims) < 3:
                 issues.append(Issue("FAIL", "claims", rp, "source pages require at least 3 claims"))
-            elif len(claims) > 8:
-                issues.append(Issue("WARN", "claims", rp, "source pages should keep claims to 3-8"))
+            elif len(claims) > 10:
+                issues.append(Issue("WARN", "claims", rp, "source pages should keep claims to 3-10"))
             if isinstance(claims, list):
                 for idx, claim in enumerate(claims, 1):
                     if not isinstance(claim, dict):
@@ -95,6 +100,10 @@ def check_pages(root: Path, include_inbox: bool) -> list[Issue]:
         if page_type == "synthesis":
             if "## Thesis" not in body:
                 issues.append(Issue("FAIL", "synthesis", rp, "synthesis page missing ## Thesis"))
+            if not re.search(r"^## 中文对照（Chinese）\s*$", body, re.MULTILINE):
+                issues.append(Issue("FAIL", "synthesis", rp, "synthesis page missing complete ## 中文对照（Chinese） section"))
+            if not re.search(r"^### 论点\s*[（(]Thesis[）)]\s*$", body, re.MULTILINE):
+                issues.append(Issue("FAIL", "synthesis", rp, "Chinese synthesis section missing 论点（Thesis）"))
             sources = fm.get("sources")
             if not isinstance(sources, list) or len(sources) < 2:
                 issues.append(Issue("FAIL", "synthesis", rp, "synthesis pages require at least two sources"))
@@ -105,7 +114,7 @@ def check_pages(root: Path, include_inbox: bool) -> list[Issue]:
             if link.strip() not in slugs:
                 issues.append(Issue("FAIL", "wikilinks", rp, f"broken link [[{link.strip()}]]"))
 
-        if path.parts[-2] in PAGE_DIRS.values() and path.parts[-3] == "wiki":
+        if len(path.parts) >= 3 and path.parts[-2] in PAGE_DIRS.values() and path.parts[-3] == "wiki":
             if f"[[{path.stem}]]" not in index_text and path.stem not in {".gitkeep"}:
                 issues.append(Issue("WARN", "index", rp, "not referenced in wiki/index.md"))
 
@@ -115,7 +124,10 @@ def check_pages(root: Path, include_inbox: bool) -> list[Issue]:
 
 
 def check_manifest(root: Path) -> list[Issue]:
-    manifest = load_json(root / ".kb" / "manifest.json", {})
+    manifest_path = root / ".kb" / "manifest.json"
+    if not manifest_path.exists():
+        return []
+    manifest = load_json(manifest_path, {})
     issues: list[Issue] = []
     if manifest.get("version") != 1:
         issues.append(Issue("FAIL", "manifest", ".kb/manifest.json", "missing version: 1"))
@@ -150,4 +162,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

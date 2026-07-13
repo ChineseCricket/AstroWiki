@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Approval queue for AstroWiki inbox pages."""
+"""Approval queue for llm-wiki inbox pages (ported from AstroWiki).
+
+Promotes reviewed inbox drafts into wiki/, updates the index, the
+approval log, and .kb/manifest.json.
+
+    python tools/queue.py list
+    python tools/queue.py approve <slug>
+    python tools/queue.py reject <slug> --reason "..."
+    python tools/queue.py archive <slug>
+"""
 
 from __future__ import annotations
 
@@ -31,12 +40,13 @@ def find_inbox(root: Path, slug: str) -> Path:
 
 
 def wiki_target(root: Path, inbox_path: Path) -> Path:
-    rel = inbox_path.relative_to(root / "inbox")
-    return root / "wiki" / rel
+    relp = inbox_path.relative_to(root / "inbox")
+    return root / "wiki" / relp
 
 
 def update_index(root: Path, target: Path) -> None:
-    text = read_text(root / "wiki" / "index.md")
+    index_path = root / "wiki" / "index.md"
+    text = read_text(index_path) if index_path.exists() else "# llm-wiki Index\n"
     slug = target.stem
     if f"[[{slug}]]" in text:
         return
@@ -48,7 +58,7 @@ def update_index(root: Path, target: Path) -> None:
         lines.insert(idx + 1, f"- [[{slug}]]")
     except ValueError:
         lines.extend(["", header, "", f"- [[{slug}]]"])
-    write_text(root / "wiki" / "index.md", "\n".join(lines) + "\n")
+    write_text(index_path, "\n".join(lines) + "\n")
 
 
 def approve(root: Path, slug: str) -> None:

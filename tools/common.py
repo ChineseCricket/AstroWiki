@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Shared helpers for AstroWiki tools."""
+"""Shared helpers for the llm-wiki tools (ported from AstroWiki, domain-adapted).
+
+The llm-wiki follows the AstroWiki provenance-first architecture
+(`raw -> inbox -> wiki -> outputs`). This module defines the page-type
+registry, provenance / claim vocabularies, the YAML-subset frontmatter
+parser used by the linter, and the helpers for discovering wiki pages.
+"""
 
 from __future__ import annotations
 
@@ -9,6 +15,8 @@ from pathlib import Path
 from typing import Any
 
 
+# Page type -> directory. `entity` is added for the FDM/TES domain
+# (labs, missions, instruments-as-orgs) following the fdm-wiki convention.
 PAGE_DIRS = {
     "source": "sources",
     "concept": "concepts",
@@ -17,10 +25,12 @@ PAGE_DIRS = {
     "dataset": "datasets",
     "instrument": "instruments",
     "synthesis": "synthesis",
+    "entity": "entities",
     "note": "notes",
 }
 
 VALID_TYPES = set(PAGE_DIRS)
+
 VALID_PROVENANCE = {
     "user-verified",
     "source-derived",
@@ -30,6 +40,7 @@ VALID_PROVENANCE = {
     "query-derived",
 }
 TRUSTED_PROVENANCE = {"user-verified", "source-derived", "catalog-derived"}
+
 VALID_CLAIM_TYPES = {
     "empirical_result",
     "method_claim",
@@ -64,7 +75,7 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
     if not match:
         return {}, text
     raw = match.group(1)
-    body = text[match.end() :]
+    body = text[match.end():]
     return parse_yaml_subset(raw), body
 
 
@@ -173,7 +184,8 @@ def slugify(text: str) -> str:
 
 def wiki_pages(root: Path, include_inbox: bool = False) -> list[Path]:
     paths: list[Path] = []
-    for base in [root / "wiki", root / "inbox"] if include_inbox else [root / "wiki"]:
+    bases = [root / "wiki", root / "inbox"] if include_inbox else [root / "wiki"]
+    for base in bases:
         for subdir in PAGE_DIRS.values():
             d = base / subdir
             if d.exists():
@@ -183,8 +195,3 @@ def wiki_pages(root: Path, include_inbox: bool = False) -> list[Path]:
 
 def page_slug(path: Path) -> str:
     return path.stem
-
-
-def target_dir_for_page(root: Path, page_type: str, inbox: bool = False) -> Path:
-    base = root / ("inbox" if inbox else "wiki")
-    return base / PAGE_DIRS[page_type]

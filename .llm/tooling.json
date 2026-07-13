@@ -1,10 +1,10 @@
 {
   "version": 1,
   "mcpServers": {
-    "astrowiki": {
+    "llm-wiki": {
       "command": "python",
-      "args": ["tools/server.py", "3849", "wiki"],
-      "description": "Local AstroWiki knowledge service exposing search, get, list_concepts, graph_neighbors, and submit_feedback."
+      "args": ["tools/server.py"],
+      "description": "Local llm-wiki knowledge service: search, get, list_concepts, graph_neighbors."
     }
   },
   "shared": {

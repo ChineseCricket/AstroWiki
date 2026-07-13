@@ -1,39 +1,14 @@
 ---
 name: lint
-description: Check AstroWiki health and provenance. Use before synthesis, release, migration, or approval.
+description: Run deterministic health checks on the wiki. Mandatory before synthesis or release.
 ---
 
-# Astro KB Lint
-
-Run deterministic checks first:
+# llm-wiki Lint
 
 ```bash
-python tools/lint.py --quiet
-python tools/lint.py --json
-python tools/lint.py --include-inbox
+python tools/lint.py --quiet                # wiki/ only
+python tools/lint.py --quiet --include-inbox  # include drafts
+python tools/lint.py --json                 # machine-readable
 ```
 
-## Checks
-
-- frontmatter
-- page type
-- provenance
-- claims
-- locator presence
-- wikilinks
-- index coverage
-- manifest consistency
-- synthesis `## Thesis`
-- `query-derived` leakage
-
-## Semantic Review
-
-After deterministic checks pass, sample pages for:
-
-- numerical consistency against source pages;
-- unsupported claims;
-- vague claims;
-- missing contradictions;
-- important keywords lacking concept pages.
-
-Reviewer outputs go to `outputs/reviews/`.
+Checks: frontmatter, type, provenance, claims (source pages), synthesis structure, wikilink resolution, index references, `.kb/manifest.json`. Fix all FAIL before approval.

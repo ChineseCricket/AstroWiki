@@ -1,23 +1,8 @@
 ---
 name: tables
-description: Export Markdown tables from wiki pages or reports to Excel workbooks under outputs/exports. Inspired by z-md-excel.
+description: Extract comparison tables (parameters, simulator features) into structured form for cross-source comparison.
 ---
 
-# Astro Markdown Table Export
+# llm-wiki Tables
 
-Use when the user wants wiki comparison tables or review tables as spreadsheets.
-
-## Workflow
-
-```bash
-python tools/export.py tables wiki/concepts/example.md --output outputs/exports/example.xlsx
-```
-
-If XLSX support is unavailable, export CSV files under `outputs/exports/`.
-
-## Rules
-
-- Read from `wiki/`, `inbox/`, or `outputs/`.
-- Write only to `outputs/exports/`.
-- Do not modify source Markdown files.
-- Strip inline Markdown formatting when exporting cells.
+Extract comparison-worthy numerical tables (TES parameters, FDM signal-chain values, simulator feature matrices) into Markdown tables within the relevant concept/method/instrument page or a `raw/tables/` CSV sidecar. Always cite `[source: citekey, locator]` per row group. Put the same field across sources side-by-side so synthesis can rank them.
